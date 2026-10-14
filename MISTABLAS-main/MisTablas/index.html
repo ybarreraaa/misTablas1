@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <title>Mundo Multiplica | Mis Tablas en 4° Básico</title>
+  <link rel="icon" type="image/svg+xml" href="Sistema/IMAGEN/star.svg">
+  <link rel="stylesheet" href="Sistema/CSS/style.css">
+  <style>
+    .hero-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.4) 0%, rgba(244, 114, 182, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .validation-feedback {
+      color: #e11d48;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 10px;
+      min-height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating kawaii background stickers -->
+  <div class="floating-math-bg">
+    <span class="floating-math-item" style="top: 12%; left: 10%; font-size: 3rem; color: #f59e0b;">✨</span>
+    <span class="floating-math-item" style="top: 68%; left: 8%; font-size: 2.8rem; color: #38bdf8; animation-delay: 2s;">✏️</span>
+    <span class="floating-math-item" style="top: 22%; right: 12%; font-size: 3.2rem; color: #ec4899; animation-delay: 4s;">⭐</span>
+    <span class="floating-math-item" style="top: 76%; right: 10%; font-size: 3.8rem; color: #10b981; animation-delay: 1s;">💡</span>
+    <span class="floating-math-item" style="top: 45%; left: 86%; font-size: 2.5rem; color: #8b5cf6; animation-delay: 3s;">×</span>
+    <span class="floating-math-item" style="top: 82%; left: 45%; font-size: 2.8rem; color: #f97316; animation-delay: 5s;">123</span>
+  </div>
+
+  <div class="hero-glow"></div>
+
+  <main class="login-wrapper">
+    <section class="login-card" aria-label="Ingreso de Estudiante">
+      
+      <!-- Brand & Mascot Logo -->
+      <div class="login-brand">
+        <img src="Sistema/IMAGEN/logo.svg" alt="Logo Mis Tablas en 4° Básico" class="login-header-logo">
+        
+        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+          <div class="cute-ribbon-pill">
+            <span>⭐</span> Aprender también es una aventura <span>⭐</span>
+          </div>
+          <div class="classroom-note-badge" style="font-size: 0.82rem; padding: 5px 12px;">
+            ¡Tú puedes! ♡
+          </div>
+        </div>
+
+        <p style="color: #64748b; font-size: 1.15rem; font-weight: 700; margin-bottom: 24px;">
+          ¡Bienvenido a Mundo Multiplica! Explora 5 zonas mágicas, supera a los jefes y colecciona a todas las criaturas.
+        </p>
+      </div>
+
+      <!-- Quick Session Resume Box if available -->
+      <div id="resumeSessionBox" style="background:#f0fdf4; border:3px dashed #86efac; border-radius:20px; padding:16px; margin-bottom:24px; display:none; align-items:center; justify-content:space-between;">
+        <div style="display: flex; align-items: center; gap: 12px; text-align: left;">
+          <img id="prevAvatarImg" src="Sistema/IMAGEN/creature2.svg" alt="Avatar Previo" style="width: 50px; height: 50px; border-radius: 50%;">
+          <div>
+            <div style="font-size: 0.85rem; color: #166534; font-weight: 800;">Estudiante anterior:</div>
+            <strong id="prevStudentName" style="color: #14532d; font-family:'Fredoka',sans-serif; font-size: 1.25rem;">Alonso</strong>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success btn-sm" id="btnResume">Continuar ➔</button>
+      </div>
+
+      <!-- Registration Form -->
+      <form id="loginForm" novalidate>
+        
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label for="studentName" style="display: block; font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: #1e1b4b; margin-bottom: 8px;">
+            ✍️ ¿Cuál es tu nombre? <span style="color: #4f46e5;">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="studentName" 
+            class="text-input" 
+            placeholder="Escribe tu nombre o apodo aquí..." 
+            autocomplete="name"
+            maxlength="25"
+            required>
+        </div>
+
+        <div style="margin-bottom: 24px; text-align: left;">
+          <label style="display: block; font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 700; color: #1e1b4b; margin-bottom: 8px;">
+            🎨 Elige tu Criatura / Mascota Compañera: <span style="color: #4f46e5;">*</span>
+          </label>
+          
+          <div class="avatar-selector-grid" id="avatarGrid" role="radiogroup" aria-label="Selección de avatar">
+            
+            <div class="avatar-choice-card" data-avatar="creature2.svg" data-name="Chispa-Ratón" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature2.svg" alt="Chispa-Ratón">
+              <span class="avatar-choice-name">Chispa ⚡</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature3.svg" data-name="Fuchy-Zorrito" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature3.svg" alt="Fuchy-Zorrito">
+              <span class="avatar-choice-name">Fuchy 🦊</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature4.svg" data-name="Pingüi-Frost" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature4.svg" alt="Pingüi-Frost">
+              <span class="avatar-choice-name">Pingüi 🐧</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature5.svg" data-name="Drako-Verde" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature5.svg" alt="Drako-Verde">
+              <span class="avatar-choice-name">Drako 🐲</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature6.svg" data-name="Axo-Rosa" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature6.svg" alt="Axo-Rosa">
+              <span class="avatar-choice-name">Axo 🌸</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature7.svg" data-name="Gati-Cósmico" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature7.svg" alt="Gati-Cósmico">
+              <span class="avatar-choice-name">Gati 🐱</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature8.svg" data-name="Panda-Bambú" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature8.svg" alt="Panda-Bambú">
+              <span class="avatar-choice-name">Panda 🐼</span>
+            </div>
+
+            <div class="avatar-choice-card" data-avatar="creature9.svg" data-name="Buhito-Sabio" role="radio" aria-checked="false" tabindex="0">
+              <img src="Sistema/IMAGEN/creature9.svg" alt="Buhito-Sabio">
+              <span class="avatar-choice-name">Buhito 🦉</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Validation Feedback -->
+        <div id="validationMsg" class="validation-feedback" role="alert" aria-live="polite"></div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" id="btnSubmit" style="width: 100%; font-size: 1.35rem; padding: 18px 24px;">
+          <span>¡Comenzar mi Aventura!</span> 🚀
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; font-size: 0.95rem; color: #64748b; font-weight: 700;">
+        Aprende multiplicaciones con grupos, patrones visuales y desafíos tipo SIMCE.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    class MiniSound {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      }
+      playPop() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.1);
+        } catch(e) {}
+      }
+      playSuccess() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const now = this.ctx.currentTime;
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.2, now + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.25);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + i * 0.08);
+            osc.stop(now + i * 0.08 + 0.25);
+          });
+        } catch(e) {}
+      }
+      playError() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+          osc.frequency.setValueAtTime(160, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.25);
+        } catch(e) {}
+      }
+    }
+
+    const sound = new MiniSound();
+    let selectedAvatar = null;
+
+    const nameInput = document.getElementById('studentName');
+    const avatarCards = document.querySelectorAll('.avatar-choice-card');
+    const loginForm = document.getElementById('loginForm');
+    const validationMsg = document.getElementById('validationMsg');
+    const resumeBox = document.getElementById('resumeSessionBox');
+    const prevAvatarImg = document.getElementById('prevAvatarImg');
+    const prevStudentName = document.getElementById('prevStudentName');
+    const btnResume = document.getElementById('btnResume');
+
+    // Check existing session
+    const savedProfile = localStorage.getItem('misTablas_student');
+    if (savedProfile) {
+      try {
+        const student = JSON.parse(savedProfile);
+        if (student && student.name) {
+          prevStudentName.textContent = student.name;
+          if (student.avatar) {
+            prevAvatarImg.src = 'Sistema/IMAGEN/' + student.avatar;
+          }
+          resumeBox.style.display = 'flex';
+          
+          btnResume.addEventListener('click', () => {
+            sound.playSuccess();
+            window.location.href = 'Sistema/index.html';
+          });
+        }
+      } catch (e) {
+        console.warn('Error reading session', e);
+      }
+    }
+
+    // Avatar selection
+    avatarCards.forEach(card => {
+      const selectAction = () => {
+        sound.playPop();
+        avatarCards.forEach(c => {
+          c.classList.remove('selected');
+          c.setAttribute('aria-checked', 'false');
+        });
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+        selectedAvatar = {
+          file: card.dataset.avatar,
+          name: card.dataset.name
+        };
+        validationMsg.textContent = '';
+      };
+
+      card.addEventListener('click', selectAction);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectAction();
+        }
+      });
+    });
+
+    // Form submission & validation
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rawName = nameInput.value.trim();
+
+      if (rawName.length < 2) {
+        sound.playError();
+        validationMsg.textContent = '⚠️ ¡Por favor escribe tu nombre (mínimo 2 letras)!';
+        nameInput.focus();
+        return;
+      }
+
+      if (!selectedAvatar) {
+        sound.playError();
+        validationMsg.textContent = '⚠️ ¡Elige una criatura compañera para comenzar!';
+        document.getElementById('avatarGrid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      sound.playSuccess();
+      validationMsg.textContent = '🚀 ¡Excelente! Preparando tu aventura...';
+      validationMsg.style.color = '#15803d';
+
+      let currentData = {};
+      try {
+        const prev = JSON.parse(localStorage.getItem('misTablas_student') || '{}');
+        if (prev && prev.name && prev.name.toLowerCase() === rawName.toLowerCase()) {
+          currentData = prev;
+        }
+      } catch(err) {}
+
+      const studentProfile = {
+        name: rawName,
+        avatar: selectedAvatar.file,
+        avatarName: selectedAvatar.name,
+        grade: '4° Básico',
+        registeredAt: currentData.registeredAt || new Date().toISOString(),
+        score: currentData.score || 0,
+        stars: currentData.stars || 0,
+        completedTables: currentData.completedTables || [],
+        tableProgress: currentData.tableProgress || {},
+        unlockedGames: currentData.unlockedGames || ['all'],
+        achievements: currentData.achievements || ['first_login'],
+        simceHistory: currentData.simceHistory || []
+      };
+
+      localStorage.setItem('misTablas_student', JSON.stringify(studentProfile));
+
+      setTimeout(() => {
+        window.location.href = 'Sistema/index.html';
+      }, 500);
+    });
+  </script>
+</body>
+</html>

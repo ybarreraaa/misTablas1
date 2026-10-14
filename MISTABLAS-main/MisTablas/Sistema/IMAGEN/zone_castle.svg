@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+  <defs>
+    <linearGradient id="castleSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef9c3"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <filter id="castleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="184" height="144" rx="28" fill="url(#castleSky)" stroke="#f59e0b" stroke-width="4" filter="url(#castleGlow)"/>
+  
+  <!-- Golden Palace / Castle Towers -->
+  <!-- Left Tower -->
+  <rect x="40" y="55" width="26" height="70" rx="3" fill="#6366f1"/>
+  <polygon points="36,55 53,28 70,55" fill="#f43f5e"/>
+  
+  <!-- Right Tower -->
+  <rect x="134" y="55" width="26" height="70" rx="3" fill="#6366f1"/>
+  <polygon points="130,55 147,28 164,55" fill="#f43f5e"/>
+
+  <!-- Main Castle Hall -->
+  <rect x="62" y="65" width="76" height="60" fill="#4f46e5"/>
+  <polygon points="70,65 100,35 130,65" fill="#fbbf24"/>
+  <circle cx="100" cy="52" r="8" fill="#ffffff"/>
+  <text x="100" y="56" font-family="'Fredoka', sans-serif" font-weight="900" font-size="10" fill="#4f46e5" text-anchor="middle">10</text>
+
+  <!-- Big Grand Golden Gate -->
+  <path d="M86,125 L86,95 Q100,82 114,95 L114,125 Z" fill="#f59e0b"/>
+
+  <!-- Golden Stars & Sparkles -->
+  <polygon points="100,12 103,20 112,22 105,28 107,37 100,32 93,37 95,28 88,22 97,20" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+
+  <!-- Zone Title Badge -->
+  <rect x="25" y="112" width="150" height="28" rx="14" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+  <text x="100" y="131" font-family="'Fredoka', sans-serif" font-weight="900" font-size="12" fill="#b45309" text-anchor="middle">
+    CASTILLO DEL 10
+  </text>
+</svg>

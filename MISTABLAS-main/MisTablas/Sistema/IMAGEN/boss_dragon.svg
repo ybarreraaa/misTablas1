@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <!-- Boss Mega-Guardián Cute Dragon -->
+  <defs>
+    <radialGradient id="bossGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="60%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#581c87"/>
+    </radialGradient>
+    <filter id="bossShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581c87" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Golden Crown -->
+  <polygon points="60,28 70,12 80,24 90,12 100,28" fill="#facc15" stroke="#b45309" stroke-width="2"/>
+  <circle cx="70" cy="12" r="3" fill="#f43f5e"/>
+  <circle cx="90" cy="12" r="3" fill="#38bdf8"/>
+  <circle cx="80" cy="24" r="3.5" fill="#a855f7"/>
+
+  <!-- Big Magical Wings -->
+  <path d="M30,70 C10,40 15,20 45,35 C38,50 42,65 30,70 Z" fill="#ec4899" stroke="#be185d" stroke-width="2.5"/>
+  <path d="M130,70 C150,40 145,20 115,35 C122,50 118,65 130,70 Z" fill="#ec4899" stroke="#be185d" stroke-width="2.5"/>
+
+  <!-- Chubby Body/Head -->
+  <ellipse cx="80" cy="85" rx="52" ry="46" fill="url(#bossGrad)" stroke="#3b0764" stroke-width="3.5" filter="url(#bossShadow)"/>
+
+  <!-- Glowing Yellow/Golden Belly with Multiplication Symbol -->
+  <ellipse cx="80" cy="105" rx="30" ry="24" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+  <text x="80" y="114" font-family="'Fredoka', sans-serif" font-weight="900" font-size="22" fill="#9333ea" text-anchor="middle">×</text>
+
+  <!-- Big Shiny Anime Eyes (Determined & Cute) -->
+  <ellipse cx="60" cy="74" rx="9" ry="11" fill="#1e1b4b"/>
+  <circle cx="63" cy="70" r="4" fill="#ffffff"/>
+  <circle cx="58" cy="78" r="1.8" fill="#facc15"/>
+
+  <ellipse cx="100" cy="74" rx="9" ry="11" fill="#1e1b4b"/>
+  <circle cx="103" cy="70" r="4" fill="#ffffff"/>
+  <circle cx="98" cy="78" r="1.8" fill="#facc15"/>
+
+  <!-- Cute Fierce Smile with fangs -->
+  <path d="M68,88 Q80,100 92,88" fill="#dc2626" stroke="#581c87" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="72,88 76,88 74,94" fill="#ffffff"/>
+  <polygon points="84,88 88,88 86,94" fill="#ffffff"/>
+
+  <!-- Rosy cheeks -->
+  <circle cx="48" cy="88" r="8" fill="#f43f5e" opacity="0.8"/>
+  <circle cx="112" cy="88" r="8" fill="#f43f5e" opacity="0.8"/>
+</svg>

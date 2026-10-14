@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <title>Mundo Multiplica | Mis Tablas en 4° Básico</title>
+  <link rel="icon" type="image/svg+xml" href="IMAGEN/star.svg">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+  <!-- Floating kawaii mathematics background elements -->
+  <div class="floating-math-bg">
+    <span class="floating-math-item" style="top: 10%; left: 6%; font-size: 2.8rem; color: #f59e0b;">✨</span>
+    <span class="floating-math-item" style="top: 60%; left: 4%; font-size: 2.4rem; color: #38bdf8; animation-delay: 2s;">✏️</span>
+    <span class="floating-math-item" style="top: 18%; right: 7%; font-size: 3rem; color: #ec4899; animation-delay: 4s;">⭐</span>
+    <span class="floating-math-item" style="top: 72%; right: 5%; font-size: 3.2rem; color: #10b981; animation-delay: 1s;">💡</span>
+    <span class="floating-math-item" style="top: 42%; left: 90%; font-size: 2.6rem; color: #8b5cf6; animation-delay: 3s;">×</span>
+    <span class="floating-math-item" style="top: 85%; left: 45%; font-size: 2.8rem; color: #f97316; animation-delay: 5s;">123</span>
+  </div>
+
+  <!-- Top Navigation & Header -->
+  <header class="app-header">
+    <div class="header-content">
+      
+      <!-- Brand & Cloud Logo -->
+      <div class="brand-wrapper" onclick="window.misTablasApp.switchMainTab('adventure')">
+        <img src="IMAGEN/logo.svg" alt="Mundo Multiplica en 4° Básico" class="brand-logo-img">
+      </div>
+
+      <!-- Quick Stats Pills (Level, Streak Days, Coins, Stars) -->
+      <div class="header-stats">
+        
+        <!-- Nivel del Entrenador -->
+        <div class="stat-pill level" title="Nivel del Estudiante">
+          <span>👑</span>
+          <span id="statLevelVal">Nivel 1</span>
+        </div>
+
+        <!-- Racha de Días -->
+        <div class="stat-pill streak" title="Racha de Días de Práctica">
+          <span>🔥</span>
+          <span id="statStreakDaysVal">3 días</span>
+        </div>
+
+        <!-- Monedas / Puntos -->
+        <div class="stat-pill score" title="Monedas Acumuladas">
+          <img src="IMAGEN/coin.svg" alt="Moneda" style="width: 20px; height: 20px;">
+          <span id="statScoreVal">0</span>
+          <span style="font-size: 0.75rem; color: #b45309;">pts</span>
+        </div>
+
+        <!-- Estrellas -->
+        <div class="stat-pill stars" title="Estrellas Recolectadas">
+          <span>★</span>
+          <span id="statStarsVal">0</span>
+        </div>
+
+        <!-- Student Profile Widget -->
+        <div class="user-profile-badge">
+          <div class="user-avatar-mini">
+            <img id="headerAvatarImg" src="IMAGEN/avatar1.svg" alt="Avatar">
+          </div>
+          <div class="user-info-text">
+            <span class="user-name-label" id="headerStudentName">Estudiante</span>
+            <span class="user-grade-tag">4° Básico</span>
+          </div>
+        </div>
+
+        <!-- Audio toggle & Logout -->
+        <button type="button" class="btn btn-secondary btn-icon" id="btnMuteToggle" title="Sonido">🔊</button>
+        <button type="button" class="btn btn-secondary btn-icon" id="btnLogout" title="Cambiar de Estudiante" style="color: #ef4444;">🚪</button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="container">
+
+    <!-- Mascot Greeting Banner with "Continuar Aventura" -->
+    <section class="mascot-greeting-banner">
+      <div class="greeting-text-box">
+        <h2>
+          <span>👋</span> 
+          ¡Hola, <span id="bannerStudentName" style="color: #4f46e5;">Campeón</span>! 
+          <span>🌟</span>
+        </h2>
+        <p>Bienvenido al <strong>Mundo Multiplica</strong>. ¡Explora las 5 zonas, vence a los jefes y colecciona criaturas!</p>
+        
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+          <button type="button" class="btn btn-primary" id="btnContinueAdventure" style="font-size: 1.15rem; padding: 12px 24px;">
+            <span>▶ Continuar Aventura</span> 🚀
+          </button>
+          <button type="button" class="btn btn-accent" id="btnBannerMonster" style="font-size: 1.05rem; padding: 12px 20px; background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);">
+            <span>🎨 Crea tu Monstruo (Post-SIMCE)</span> 👾
+          </button>
+          <div class="cute-ribbon-pill">
+            <span>⭐</span> Aprender también es una aventura <span>⭐</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-bar-wrapper">
+        <div class="progress-track">
+          <div class="progress-fill" id="globalProgressBar"></div>
+        </div>
+        <div class="progress-track-label">
+          <span>Progreso General del Mundo</span>
+          <span id="globalProgressText">0%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 1: AVENTURA (MAPA DE LAS 5 ZONAS DEL MUNDO MULTIPLICA)
+         ======================================================================= -->
+    <section id="section-adventure" class="view-section active">
+      <div class="section-header-box">
+        <h2><span>🗺️</span> Mapa de Zonas: Mundo Multiplica</h2>
+        <p>Avanza por cada región temática para liberar a sus mascotas, aprender sus trucos y desafiar al Jefe de Zona.</p>
+      </div>
+
+      <!-- Map Zones Grid -->
+      <div class="map-zones-grid" id="adventureZonesGrid"></div>
+
+      <!-- Quick tables grid drawer (for individual tables 2 to 10) -->
+      <div style="margin-top: 36px;">
+        <div class="section-header-box">
+          <h3 style="font-size: 1.6rem; color: #1e1b4b;">🌟 Álbum Rápido de Tablas Individuales</h3>
+          <p>Toca directamente cualquier tabla para repasarla o completar sus desafíos de 3 estrellas.</p>
+        </div>
+        <div class="tables-grid" id="tablesGrid"></div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 2: LOS 10 JUEGOS DE ACCIÓN VISUAL
+         ======================================================================= -->
+    <section id="section-games" class="view-section">
+      <div class="section-header-box">
+        <h2><span>🎮</span> Los 10 Minijuegos de Acción y Diversión</h2>
+        <p>¡Aquí las multiplicaciones son parte de la acción! Corre, ataca, salta, protege y abre cofres legendarios.</p>
+      </div>
+
+      <div class="games-action-grid">
+        
+        <!-- 1. Batalla de Criaturas -->
+        <article class="game-action-card" data-game="battle" style="border-color: #818cf8;">
+          <div>
+            <div class="game-action-badge" style="background: #eef2ff; color: #4f46e5;">⚔️</div>
+            <h3 class="game-action-title">1. Batalla de Criaturas</h3>
+            <p class="game-action-desc">Ataca al monstruo rival respondiendo multiplicaciones. ¡Logra rachas para activar ataques especiales con doble daño!</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Luchar! ➔</button>
+        </article>
+
+        <!-- 2. Atrapa al Monstruo Correcto -->
+        <article class="game-action-card" data-game="catch" style="border-color: #f472b6;">
+          <div>
+            <div class="game-action-badge" style="background: #fdf2f8; color: #db2777;">🎈</div>
+            <h3 class="game-action-title">2. Atrapa al Monstruo</h3>
+            <p class="game-action-desc">Monstruos flotan con números encima. Cuando salga la operación, atrapa a la criatura que lleva el resultado antes de que escape.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Atrapar! ➔</button>
+        </article>
+
+        <!-- 3. Carrera Matemática -->
+        <article class="game-action-card" data-game="race" style="border-color: #60a5fa;">
+          <div>
+            <div class="game-action-badge" style="background: #eff6ff; color: #2563eb;">🏎️</div>
+            <h3 class="game-action-title">3. Carrera Matemática</h3>
+            <p class="game-action-desc">¡Duelo de velocidad en la pista! Responde rápido para activar el turbo nitro 🚀 y llegar primero a la meta.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Correr! ➔</button>
+        </article>
+
+        <!-- 4. Camino Peligroso -->
+        <article class="game-action-card" data-game="path" style="border-color: #38bdf8;">
+          <div>
+            <div class="game-action-badge" style="background: #f0f9ff; color: #0284c7;">🌉</div>
+            <h3 class="game-action-title">4. Camino Peligroso</h3>
+            <p class="game-action-desc">Cruza el río saltando sobre piedras que tienen números. Si te equivocas, tambaleas sin caerte para volver a intentarlo.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Cruzar! ➔</button>
+        </article>
+
+        <!-- 5. Defiende el Castillo -->
+        <article class="game-action-card" data-game="defense" style="border-color: #c084fc;">
+          <div>
+            <div class="game-action-badge" style="background: #faf5ff; color: #7c3aed;">🏰</div>
+            <h3 class="game-action-title">5. Defiende el Castillo</h3>
+            <p class="game-action-desc">Monstruos marchan hacia la muralla con operaciones. Dispara el cañón con la respuesta exacta para detenerlos.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Defender! ➔</button>
+        </article>
+
+        <!-- 6. Memoria de Multiplicaciones -->
+        <article class="game-action-card" data-game="memory" style="border-color: #34d399;">
+          <div>
+            <div class="game-action-badge" style="background: #ecfdf5; color: #059669;">🃏</div>
+            <h3 class="game-action-title">6. Memoria de Multiplicaciones</h3>
+            <p class="game-action-desc">Cartas 3D boca abajo. Encuentra la pareja entre la operación (ej. 8 × 6) y su resultado exacto (48).</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Emparejar! ➔</button>
+        </article>
+
+        <!-- 7. Laboratorio de Criaturas -->
+        <article class="game-action-card" data-game="lab" style="border-color: #a7f3d0;">
+          <div>
+            <div class="game-action-badge" style="background: #f0fdf4; color: #16a34a;">🧪</div>
+            <h3 class="game-action-title">7. Laboratorio de Criaturas</h3>
+            <p class="game-action-desc">Incuba un huevo mágico resolviendo multiplicaciones: añade color, ojos, alas y despierta a tu nueva mascota.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Incubar! ➔</button>
+        </article>
+
+        <!-- 8. Tesoro Perdido -->
+        <article class="game-action-card" data-game="treasure" style="border-color: #facc15;">
+          <div>
+            <div class="game-action-badge" style="background: #fefce8; color: #b45309;">💎</div>
+            <h3 class="game-action-title">8. Tesoro Perdido</h3>
+            <p class="game-action-desc">Mapa secreto con 4 cofres cerrados con candados de multiplicación. ¡Ábrelos todos para ganar oro y gemas!</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Abrir! ➔</button>
+        </article>
+
+        <!-- 9. Combo Relámpago -->
+        <article class="game-action-card" data-game="combo" style="border-color: #fb923c;">
+          <div>
+            <div class="game-action-badge" style="background: #fff7ed; color: #c2410c;">⚡</div>
+            <h3 class="game-action-title">9. Combo Relámpago</h3>
+            <p class="game-action-desc">60 segundos de adrenalina pura. Responde multiplicaciones seguidas para multiplicar tus puntos en Combo x2, x3 y x4.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡A toda velocidad! ➔</button>
+        </article>
+
+        <!-- 10. El Impostor Matemático -->
+        <article class="game-action-card" data-game="impostor" style="border-color: #f87171;">
+          <div>
+            <div class="game-action-badge" style="background: #fef2f2; color: #dc2626;">🕵️</div>
+            <h3 class="game-action-title">10. El Impostor Matemático</h3>
+            <p class="game-action-desc">¡No solo calcular! Aparecen 4 operaciones y una de ellas tiene un error falso. ¡Encuentra al impostor!</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">¡Investigar! ➔</button>
+        </article>
+
+        <!-- 11. Crea tu Monstruo Multiplicador (Taller de Dibujo y Relajo Post-SIMCE) -->
+        <article class="game-action-card" data-game="monster" style="border-color: #ec4899; background: linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%);">
+          <div>
+            <div class="game-action-badge" style="background: #fdf2f8; color: #db2777;">🎨</div>
+            <h3 class="game-action-title">11. Crea tu Monstruo</h3>
+            <p class="game-action-desc">¡Actividad creativa y relajante post-SIMCE! Dibuja y personaliza a tu criatura mágica con 5 multiplicaciones entretenidas.</p>
+          </div>
+          <button type="button" class="btn btn-accent btn-sm" style="background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);">¡Dibujar! 🎨</button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 3: DESAFÍO DIARIO (Para Mantener la Racha)
+         ======================================================================= -->
+    <section id="section-daily" class="view-section">
+      <div class="section-header-box">
+        <h2><span>⚡</span> Desafío Diario de Mundo Multiplica</h2>
+        <p>Completa tu reto de hoy para mantener activa tu racha de días consecutivos y ganar monedas extra.</p>
+      </div>
+
+      <div style="background:#ffffff; border-radius:28px; padding:36px; border:4px solid #fde047; max-width:680px; margin:0 auto; text-align:center; box-shadow:var(--shadow-card);">
+        <div style="font-size:4rem; margin-bottom:8px;">🔥</div>
+        <h3 style="font-size:2rem; color:#1e1b4b; margin-bottom:6px;">Misión del Día</h3>
+        <div class="cute-ribbon-pill" style="font-size:1.1rem; margin-bottom:16px;">
+          Racha actual: <span style="font-weight:900;">3 días seguidos</span> 🔥
+        </div>
+        <p style="font-size:1.15rem; color:#64748b; font-weight:600; line-height:1.5; margin-bottom:24px;">
+          Resuelve la ronda relámpago diaria de operaciones para ganar <strong>+300 Monedas Doradas 🪙</strong> y asegurar tu racha de hoy.
+        </p>
+
+        <button type="button" class="btn btn-accent" id="btnStartDailyChallenge" style="font-size:1.3rem; padding:18px 36px;">
+          <span>¡Jugar Desafío Diario!</span> ⚡
+        </button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 4: COLECCIÓN DE CRIATURAS (ÁLBUM / POKÉDEX KAWAII)
+         ======================================================================= -->
+    <section id="section-collection" class="view-section">
+      <div class="section-header-box">
+        <h2><span>📖</span> Álbum de Colección de Criaturas</h2>
+        <p>¡Colecciona a las 9 mascotas del Mundo Multiplica! Cada criatura se desbloquea al aprender y dominar su tabla.</p>
+      </div>
+
+      <div class="collection-grid" id="collectionGrid"></div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 5: ENSAYO SIMCE (ACCESIBLE DESDE EL CASTILLO)
+         ======================================================================= -->
+    <section id="section-simce" class="view-section">
+      
+      <!-- Intro Screen -->
+      <div id="simceIntroScreen" class="simce-main-card" style="text-align: center; max-width: 820px; margin: 0 auto;">
+        <div>
+          <img src="IMAGEN/simce_badge.svg" alt="SIMCE 4° Básico" style="width: 110px; height: 110px; margin: 0 auto 16px; display: block;">
+          <h2 style="font-size: 2.2rem; color: #1e1b4b; margin-bottom: 8px;">Ensayo Matemático Tipo SIMCE</h2>
+          <div class="cute-ribbon-pill" style="font-size: 0.95rem; margin-bottom: 16px;">
+            EVALUACIÓN NACIONAL • 4° AÑO BÁSICO • MATEMÁTICA
+          </div>
+          <p style="font-size: 1.15rem; color: #475569; font-weight: 600; line-height: 1.6; max-width: 660px; margin: 0 auto 24px;">
+            Este ensayo contiene <strong>10 situaciones reales</strong> cercanas a tu vida escolar: 
+            compras en el quiosco, grupos en el aula, huerto escolar, salidas en furgón y kermesse.
+          </p>
+
+          <button type="button" class="btn btn-primary" id="btnStartSimce" style="font-size: 1.3rem; padding: 18px 40px;">
+            <span>¡Comenzar Ensayo SIMCE!</span> 🚀
+          </button>
+        </div>
+      </div>
+
+      <!-- Testing Container -->
+      <div id="simceTestingContainer" style="display: none;">
+        <div class="simce-layout">
+          
+          <aside class="simce-sidebar">
+            <div style="text-align: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #f1f5f9;">
+              <h4 style="font-size: 1.15rem; color: #1e1b4b;">Preguntas del Ensayo</h4>
+              <div class="cute-ribbon-pill" id="simceTimerDisplay" style="margin-top: 8px;">⏱️ 00:00</div>
+            </div>
+
+            <div class="simce-grid-nav" id="simceNavGrid"></div>
+
+            <div style="text-align: center; margin-bottom: 16px; font-size: 0.95rem; font-weight: 800; color: #475569;">
+              Respondidas: <span id="simceAnsweredCount" style="color: #10b981;">0 de 10</span>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <button type="button" class="btn btn-success" id="simceBtnFinish" style="width: 100%; font-size: 1.05rem;">
+                ✓ Finalizar Ensayo
+              </button>
+            </div>
+          </aside>
+
+          <div class="simce-main-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #f1f5f9;">
+                <span class="cute-ribbon-pill" id="simceQBadge" style="background:#e0e7ff; color:#3730a3; border-color:#818cf8;">Pregunta 1 de 10</span>
+                <span class="classroom-note-badge" id="simceContextTag">Contexto</span>
+              </div>
+
+              <div class="simce-problem-text" id="simceProblemText">
+                Cargando problema contextualizado...
+              </div>
+
+              <div class="simce-options-list" id="simceOptionsList"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; border-top: 2px solid #f1f5f9; padding-top: 20px; flex-wrap: wrap; gap: 12px;">
+              <button type="button" class="btn btn-secondary" id="simceBtnPrev">⬅ Anterior</button>
+              <button type="button" class="btn btn-primary" id="simceBtnNext">Siguiente ➔</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="simceResultScreen" style="display: none;"></div>
+    </section>
+
+    <!-- =======================================================================
+         SECCIÓN 6: CREA TU MONSTRUO MULTIPLICADOR (POST-SIMCE)
+         ======================================================================= -->
+    <section id="section-monster" class="view-section">
+      
+      <!-- Banner Superior de la Actividad -->
+      <div class="monster-header-card">
+        <div class="monster-header-content">
+          <div class="cute-ribbon-pill" style="background:#fef08a; color:#854d0e; font-weight:800; margin-bottom:8px;">
+            ⭐ TALLER CREATIVO & RELAJO POST-SIMCE • 4° BÁSICO ⭐
+          </div>
+          <h2 class="monster-main-title">
+            <span>🎨</span> ¡Crea tu Monstruo Multiplicador! <span>👾</span>
+          </h2>
+          <p class="monster-sub-desc">
+            ¡Hiciste un gran trabajo en el SIMCE! Ahora descansa tu mente, diviértete y diseña tu propia criatura inventada. 
+            Resuelve estas <strong>5 multiplicaciones simples</strong> para saber qué partes tendrá tu dibujo:
+          </p>
+        </div>
+
+        <div class="monster-header-actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnPrintBlankSheet" title="Imprimir hoja para pintar a mano con lápices">
+            🖨️ Imprimir Ficha en Papel
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnShowMonsterExamples" title="Ver ejemplos de criaturas">
+            ✨ Ver Ejemplos
+          </button>
+          <button type="button" class="btn btn-accent btn-sm" id="btnToggleConsignasPack" title="Cambiar a otro pack de operaciones">
+            🎲 Cambiar Pack
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Progreso y Consignas Rápidas -->
+      <div class="monster-consignas-box">
+        <div class="monster-consignas-header">
+          <div class="consignas-title-tag">
+            <span>📋</span> Las 5 Misiones de Multiplicación de tu Monstruo
+          </div>
+          <div class="monster-progress-pill" id="monsterProgressPill">
+            🌟 Consignas listas: <strong>0 de 5</strong>
+          </div>
+        </div>
+
+        <!-- Lista dinámica de consignas -->
+        <div class="monster-consignas-grid" id="monsterConsignasList"></div>
+      </div>
+
+      <!-- Taller de Creación: Lienzo a la Izquierda, Ficha a la Derecha -->
+      <div class="monster-workshop-grid">
+        
+        <!-- Columna Izquierda: Lienzo de Dibujo Digital -->
+        <div class="monster-canvas-card">
+          <div class="canvas-top-bar">
+            <div style="font-family:'Fredoka',sans-serif; font-size:1.15rem; font-weight:800; color:#1e1b4b; display:flex; align-items:center; gap:8px;">
+              <span>🖌️</span> Lienzo de Dibujo Libre
+            </div>
+
+            <div class="canvas-quick-tools">
+              <button type="button" class="tool-btn active" id="toolBrushBtn" title="Pincel">✏️ Pincel</button>
+              <button type="button" class="tool-btn" id="toolEraserBtn" title="Goma de Borrar">🧹 Goma</button>
+              <button type="button" class="tool-btn" id="toolUndoBtn" title="Deshacer trazo">↩️ Deshacer</button>
+              <button type="button" class="tool-btn danger" id="toolClearBtn" title="Borrar todo el lienzo">🗑️ Limpiar</button>
+            </div>
+          </div>
+
+          <!-- Paleta de Colores y Tamaños -->
+          <div class="canvas-palette-bar">
+            <!-- Colores Kawaii -->
+            <div class="swatches-container">
+              <button type="button" class="monster-color-swatch active" data-color="#4f46e5" style="background:#4f46e5;" title="Morado"></button>
+              <button type="button" class="monster-color-swatch" data-color="#0284c7" style="background:#0284c7;" title="Azul"></button>
+              <button type="button" class="monster-color-swatch" data-color="#10b981" style="background:#10b981;" title="Verde"></button>
+              <button type="button" class="monster-color-swatch" data-color="#f59e0b" style="background:#f59e0b;" title="Amarillo"></button>
+              <button type="button" class="monster-color-swatch" data-color="#ea580c" style="background:#ea580c;" title="Naranja"></button>
+              <button type="button" class="monster-color-swatch" data-color="#f43f5e" style="background:#f43f5e;" title="Rosa"></button>
+              <button type="button" class="monster-color-swatch" data-color="#78350f" style="background:#78350f;" title="Marrón"></button>
+              <button type="button" class="monster-color-swatch" data-color="#1e1b4b" style="background:#1e1b4b;" title="Negro"></button>
+              <button type="button" class="monster-color-swatch" data-color="#ffffff" style="background:#ffffff; border:2px solid #cbd5e1;" title="Blanco"></button>
+              <label class="custom-color-label" title="Elegir otro color">
+                🎨
+                <input type="color" id="customColorPicker" value="#4f46e5">
+              </label>
+            </div>
+
+            <!-- Tamaños de Pincel -->
+            <div class="brush-sizes-container">
+              <span style="font-size:0.8rem; font-weight:800; color:#64748b;">Grosor:</span>
+              <button type="button" class="brush-size-btn" data-size="4" title="Fino">Fino</button>
+              <button type="button" class="brush-size-btn active" data-size="8" title="Medio">Medio</button>
+              <button type="button" class="brush-size-btn" data-size="16" title="Grueso">Grueso</button>
+              <button type="button" class="brush-size-btn" data-size="28" title="Relleno">Relleno</button>
+            </div>
+          </div>
+
+          <!-- Barra de Estampas Divertidas (Sellitos instantáneos) -->
+          <div class="canvas-stamps-bar">
+            <span style="font-size:0.82rem; font-weight:800; color:#4338ca; white-space:nowrap;">✨ Estampas:</span>
+            <div class="stamps-scroll">
+              <button type="button" class="stamp-btn" data-stamp="👀" title="Estampar Ojos">👀 Ojos</button>
+              <button type="button" class="stamp-btn" data-stamp="⭐" title="Estampar Estrellas">⭐ Estrella</button>
+              <button type="button" class="stamp-btn" data-stamp="🦷" title="Estampar Dientes">🦷 Dientes</button>
+              <button type="button" class="stamp-btn" data-stamp="🐾" title="Estampar Patitas">🐾 Patas</button>
+              <button type="button" class="stamp-btn" data-stamp="🟣" title="Estampar Manchas">🟣 Mancha</button>
+              <button type="button" class="stamp-btn" data-stamp="💖" title="Estampar Corazón">💖 Corazón</button>
+              <button type="button" class="stamp-btn" data-stamp="⚡" title="Estampar Rayo">⚡ Rayo</button>
+              <button type="button" class="stamp-btn" data-stamp="👑" title="Estampar Corona">👑 Corona</button>
+            </div>
+          </div>
+
+          <!-- Contenedor del Canvas -->
+          <div class="canvas-drawing-area" id="canvasDrawingWrapper">
+            <canvas id="monsterCanvas"></canvas>
+          </div>
+
+          <!-- Botones de Acción del Canvas -->
+          <div class="canvas-bottom-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnPrintFilledSheet">
+              🖨️ Imprimir con mi Dibujo
+            </button>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadMonster">
+                💾 Descargar PNG
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" id="btnSaveMonsterAlbum">
+                ⭐ Guardar en mi Perfil
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta de Identidad del Monstruo -->
+        <div class="monster-profile-card">
+          <div class="monster-passport-header">
+            <div class="passport-title-box">
+              <span class="passport-icon">📋</span>
+              <div>
+                <h3 style="font-size:1.35rem; color:#1e1b4b; margin:0;">Ficha de la Criatura</h3>
+                <span style="font-size:0.82rem; color:#64748b; font-weight:700;">¡Inventa sus datos secretos!</span>
+              </div>
+            </div>
+            <div class="cute-ribbon-pill" style="font-size:0.75rem; background:#dcfce7; color:#15803d; border-color:#86efac;">
+              Registro Oficial 🌟
+            </div>
+          </div>
+
+          <form id="monsterProfileForm" class="monster-profile-form" onsubmit="event.preventDefault();">
+            <!-- 1. Nombre -->
+            <div class="monster-form-group">
+              <label for="monsterNameInput">
+                🏷️ <strong>Nombre de tu monstruo:</strong>
+              </label>
+              <input type="text" id="monsterNameInput" class="text-input" placeholder="Ej: Burbujón, Chispita, Colmillitos..." maxlength="30">
+            </div>
+
+            <!-- 2. Poder Especial -->
+            <div class="monster-form-group">
+              <label for="monsterPowerInput">
+                ⚡ <strong>Poder especial:</strong>
+              </label>
+              <input type="text" id="monsterPowerInput" class="text-input" placeholder="Ej: Lanza rayos de purpurina, salta hasta las nubes..." maxlength="60">
+            </div>
+
+            <!-- 3. Qué le gusta -->
+            <div class="monster-form-group">
+              <label for="monsterLikesInput">
+                💖 <strong>Qué le gusta:</strong>
+              </label>
+              <input type="text" id="monsterLikesInput" class="text-input" placeholder="Ej: Comer galletas con leche, jugar a las escondidas..." maxlength="60">
+            </div>
+
+            <!-- 4. Su multiplicación favorita -->
+            <div class="monster-form-group">
+              <label for="monsterFavMultInput">
+                🔢 <strong>Su multiplicación favorita:</strong>
+              </label>
+              <input type="text" id="monsterFavMultInput" class="text-input" placeholder="Ej: 2 × 3 = 6 (¡la de sus ojos!) o 5 × 5 = 25" maxlength="40">
+            </div>
+          </form>
+
+          <!-- Previsualización Kawaii de la Placa del Monstruo -->
+          <div class="monster-badge-preview">
+            <div class="preview-badge-top">
+              <span style="font-size:1.8rem;">👾</span>
+              <strong id="previewMonsterName" class="preview-monster-title">Sin bautizar aún</strong>
+            </div>
+            <p id="previewMonsterPower" class="preview-line">⚡ Escribe su superpoder arriba</p>
+            <p id="previewMonsterLikes" class="preview-line">💖 Escribe qué le gusta arriba</p>
+            <p id="previewMonsterFavMult" class="preview-line">🔢 Elige su multiplicación favorita</p>
+          </div>
+
+          <!-- Nota Pedagógica Amigable Post-SIMCE -->
+          <div class="monster-chill-reminder">
+            <span>🌿</span>
+            <p><strong>Recuerda:</strong> Esta actividad es para relajarse después del SIMCE. No hay respuestas malas, ¡solo diversión y creatividad!</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       LOS CINCO ACCESOS GRANDES INFERIORES (DOCK FIJO)
+       Aventura | Juegos | Monstruo (Creativo) | Desafío Diario | Colección
+       ========================================================================= -->
+  <nav class="bottom-dock-nav" aria-label="Navegación Principal Mundo Multiplica">
+    <div class="dock-content">
+      
+      <button type="button" class="dock-btn active" data-tab="adventure">
+        <span class="dock-icon">🗺️</span>
+        <span class="dock-label">Aventura</span>
+      </button>
+
+      <button type="button" class="dock-btn" data-tab="games">
+        <span class="dock-icon">🎮</span>
+        <span class="dock-label">Juegos</span>
+      </button>
+
+      <button type="button" class="dock-btn" data-tab="monster" style="color: #db2777;">
+        <span class="dock-icon">🎨</span>
+        <span class="dock-label">Monstruo</span>
+      </button>
+
+      <button type="button" class="dock-btn" data-tab="daily">
+        <span class="dock-icon">⚡</span>
+        <span class="dock-label">Desafío</span>
+      </button>
+
+      <button type="button" class="dock-btn" data-tab="collection">
+        <span class="dock-icon">📖</span>
+        <span class="dock-label">Colección</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       MODAL 1: LABORATORIO DE LA TABLA CON LA MASCOTA
+       ========================================================================= -->
+  <div class="modal-overlay" id="tableModalOverlay">
+    <div class="modal-window">
+      
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <div class="modal-creature-mini">
+            <img id="tableModalCreatureImg" src="IMAGEN/creature2.svg" alt="Mascota">
+          </div>
+          <div>
+            <span id="tableModalBadge" class="cute-ribbon-pill" style="font-size:0.75rem; padding:3px 10px; color:#ffffff;">TABLA</span>
+            <h3 id="tableModalTitle" style="font-size: 1.45rem; color: #1e1b4b; margin-top: 2px;">Exploración de la Tabla</h3>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="tableModalClose" title="Cerrar ventana">✕</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <div class="table-play-tabs">
+          <button type="button" class="table-play-tab active" id="tabExplore">
+            👁️ Explora con la Mascota (Grupos y Patrones)
+          </button>
+          <button type="button" class="table-play-tab" id="tabPractice">
+            ⭐ Ejercicios Interactivos (¡Gana Estrellas!)
+          </button>
+        </div>
+
+        <div id="viewExplore">
+          <div style="text-align: center; margin-bottom: 12px; font-weight: 700; color: #64748b; font-size: 1.05rem;">
+            Toca un número para ver cómo se agrupa la multiplicación:
+          </div>
+
+          <div class="multiplier-bar" id="multiplierBar"></div>
+
+          <div class="copisi-display-card">
+            <div class="copisi-formula-title" id="copisiFormula">6 × 3 = 18</div>
+            <div class="copisi-repeated-addition" id="copisiAddition">6 + 6 + 6 = 18 (3 veces 6)</div>
+            
+            <div style="font-weight: 800; color: #0369a1; font-size: 1.05rem; margin-top: 14px;">
+              📦 Grupos y Objetos de Colección:
+            </div>
+            <div class="visual-groups-container" id="visualGroups"></div>
+          </div>
+
+          <div class="number-line-container">
+            <div style="font-weight: 800; font-size: 1rem; color: #4338ca; margin-bottom: 8px;">
+              🐇 Saltos Iguales en la Recta Numérica:
+            </div>
+            <div class="number-line-track" id="numberLineTrack"></div>
+          </div>
+
+          <div class="secret-pattern-box">
+            <div class="secret-pattern-icon">💡</div>
+            <div class="secret-pattern-text">
+              <h4>¡Patrón Secreto y Truco de la Mascota!</h4>
+              <p id="patternText">Cargando patrón...</p>
+              <p id="trickText" style="margin-top: 6px; font-weight: 700; color: #b45309;">Cargando truco...</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="viewPractice" style="display: none;">
+          <div class="practice-container" id="practiceContainer"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: GAME ARENA (Pantalla de Juegos)
+       ========================================================================= -->
+  <div class="game-arena-overlay" id="gameArenaOverlay">
+    <div class="game-arena-header">
+      <div class="arena-title-box">
+        <h3 id="arenaTitle">Título del Juego</h3>
+      </div>
+      <div class="arena-stats-bar">
+        <div class="arena-stat timer" id="arenaTimer">🎮 En juego</div>
+        <div class="arena-stat streak" id="arenaStreak">0 racha</div>
+        <div class="arena-stat score" id="arenaScore">0 pts</div>
+        <button type="button" class="modal-close-btn" id="arenaCloseBtn" title="Salir del juego" style="background:#334155; color:#ffffff;">✕</button>
+      </div>
+    </div>
+    <div class="game-arena-body" id="arenaBody"></div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: EJEMPLOS DE MONSTRUOS MULTIPLICADORES (Inspiración)
+       ========================================================================= -->
+  <div class="modal-overlay" id="monsterExamplesOverlay">
+    <div class="modal-window" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span style="font-size:2rem;">🎨</span>
+          <div>
+            <span class="cute-ribbon-pill" style="font-size:0.75rem; background:#fef08a; color:#854d0e;">GALERÍA DE INSPIRACIÓN</span>
+            <h3 style="font-size:1.4rem; color:#1e1b4b; margin-top:2px;">¡Monstruos de Ejemplo para Inspirarte!</h3>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="monsterExamplesClose">✕</button>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <p style="color:#64748b; font-weight:700; margin-bottom:16px; font-size:1rem;">
+          ¡No te preocupes por hacer un dibujo perfecto! Lo importante es pasarlo bien y cumplir con las multiplicaciones. Mira cómo otros estudiantes imaginaron a sus criaturas:
+        </p>
+        <div class="monster-examples-grid" id="monsterExamplesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CONTENEDOR DE IMPRESIÓN (Visible exclusivamente al imprimir con window.print)
+       ========================================================================= -->
+  <div id="printableWorksheet" class="printable-worksheet-wrapper"></div>
+
+  <!-- Scripts -->
+  <script src="JS/tables.js"></script>
+  <script src="JS/games.js"></script>
+  <script src="JS/simce.js"></script>
+  <script src="JS/monster.js"></script>
+  <script src="JS/app.js"></script>
+</body>
+</html>
