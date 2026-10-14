@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- Gati-Cósmico (Espurr/Mew style kawaii cat for Tabla del 7) -->
+  <defs>
+    <radialGradient id="catBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="70%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </radialGradient>
+    <filter id="catGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#6d28d9" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <circle cx="70" cy="70" r="62" fill="#faf5ff" opacity="0.8"/>
+  <circle cx="70" cy="70" r="56" fill="#f3e8ff" opacity="0.5"/>
+
+  <!-- Ears with Pink Inside -->
+  <polygon points="36,52 30,22 62,38" fill="#7c3aed" stroke="#5b21b6" stroke-width="2.5"/>
+  <polygon points="38,48 34,28 54,38" fill="#f472b6"/>
+
+  <polygon points="104,52 110,22 78,38" fill="#7c3aed" stroke="#5b21b6" stroke-width="2.5"/>
+  <polygon points="102,48 106,28 86,38" fill="#f472b6"/>
+
+  <!-- Cosmic Moon on Forehead -->
+  <path d="M70,36 C66,36 62,42 66,48 C72,48 74,40 70,36 Z" fill="#fde047"/>
+
+  <!-- Head/Body -->
+  <ellipse cx="70" cy="76" rx="42" ry="38" fill="url(#catBg)" stroke="#6d28d9" stroke-width="3" filter="url(#catGlow)"/>
+
+  <!-- Sparkly Violet Eyes -->
+  <ellipse cx="52" cy="72" rx="8" ry="9.5" fill="#1e1b4b"/>
+  <circle cx="55" cy="68" r="3.8" fill="#ffffff"/>
+  <circle cx="50" cy="76" r="1.5" fill="#c084fc"/>
+
+  <ellipse cx="88" cy="72" rx="8" ry="9.5" fill="#1e1b4b"/>
+  <circle cx="91" cy="68" r="3.8" fill="#ffffff"/>
+  <circle cx="86" cy="76" r="1.5" fill="#c084fc"/>
+
+  <!-- Rosy Cheeks -->
+  <circle cx="44" cy="82" r="8" fill="#fb7185" opacity="0.8"/>
+  <circle cx="96" cy="82" r="8" fill="#fb7185" opacity="0.8"/>
+
+  <!-- Nose and Mouth -->
+  <polygon points="70,80 67,78 73,78" fill="#fb7185"/>
+  <path d="M66,83 Q70,87 74,83" fill="none" stroke="#1e1b4b" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Floating Crystal with 7 Facets -->
+  <polygon points="70,95 78,105 70,118 62,105" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>
+  <text x="70" y="110" font-size="8" font-family="'Fredoka', sans-serif" font-weight="900" fill="#ffffff" text-anchor="middle">7</text>
+</svg>

@@ -1,0 +1,22 @@
+{
+  "name": "Mundo Multiplica - Mis Tablas 4° Básico",
+  "short_name": "Mundo Multiplica",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#e0e7ff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "Sistema/IMAGEN/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Sistema/IMAGEN/star.svg",
+      "sizes": "60x60",
+      "type": "image/svg+xml"
+    }
+  ]
+}
