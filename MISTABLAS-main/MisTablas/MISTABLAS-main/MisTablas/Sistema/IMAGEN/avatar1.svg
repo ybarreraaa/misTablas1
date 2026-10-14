@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Astro-Gato -->
+  <defs>
+    <radialGradient id="gatoBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#gatoBg)"/>
+  <!-- Helmet Glass -->
+  <circle cx="50" cy="52" r="34" fill="#e0e7ff" opacity="0.3"/>
+  <!-- Cat ears inside/outside helmet -->
+  <polygon points="30,28 40,16 46,30" fill="#f472b6"/>
+  <polygon points="70,28 60,16 54,30" fill="#f472b6"/>
+  <!-- Cat head -->
+  <circle cx="50" cy="52" r="26" fill="#f43f5e"/>
+  <circle cx="42" cy="48" r="4" fill="#ffffff"/>
+  <circle cx="42" cy="48" r="2.5" fill="#1e1b4b"/>
+  <circle cx="58" cy="48" r="4" fill="#ffffff"/>
+  <circle cx="58" cy="48" r="2.5" fill="#1e1b4b"/>
+  <!-- Nose and mouth -->
+  <polygon points="48,54 52,54 50,57" fill="#fbcfe8"/>
+  <path d="M46,58 Q50,62 54,58" fill="none" stroke="#ffe4e6" stroke-width="2" stroke-linecap="round"/>
+  <!-- Helmet rim -->
+  <ellipse cx="50" cy="52" rx="33" ry="33" fill="none" stroke="#38bdf8" stroke-width="4"/>
+  <!-- Glass reflection -->
+  <path d="M28,38 A28,28 0 0,1 62,24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <!-- Antenna with star -->
+  <line x1="50" y1="18" x2="50" y2="8" stroke="#38bdf8" stroke-width="3"/>
+  <circle cx="50" cy="7" r="4" fill="#fbbf24"/>
+</svg>
